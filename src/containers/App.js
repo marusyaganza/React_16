@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import './App.css';
-import Person from './Person/Person';
-
+import styles from '../assets/App.css';
+import Person from '../components/Persons/Person/Person';
+import Errorboundary from './ErrorBoundary/ErrorBoundary'
+import Persons from '../components/Persons/Persons'
 //''.log => console.log();
 class App extends Component {
     state = {
@@ -59,40 +60,32 @@ class App extends Component {
             padding: '8px',
             color: 'white',
             cursor: 'pointer'
-            };
+        };
 
         let persons = null;
+        let btnClass = '';
         if (this.state.showPersons) {
             persons = (
-                <div>
-                    {this.state.persons.map((person, index) => {
-                        return (
-                            <Person
-                                name={person.name}
-                                age={person.age}
-                                click={() => this.deletePersonHandler(index)}
-                                key={person.id}
-                                changed={(event) => this.nameChangeHandler(event, person.id)}
-                            />
-                        )
-                    })}
-                </div>
+                persons = <Persons
+                    persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangedHandler} />;
             )
-            style.backgroundColor = 'red';
-
-            }
+            //style.backgroundColor = 'red';
+            btnClass = styles.Red;
+        }
 //some comment
         let classes = [];
         if (this.state.persons.length <= 2) {
-            classes.push('red');
+            classes.push(styles);
         }
         if (this.state.persons.length <= 1) {
-            classes.push('bold');
+            classes.push(styles.bold);
         }
         return (
-            <div className="App">
+            <div className={styles.App}>
                 <button
-                    style={style}
+                    className={btnClass}
                     onClick={this.togglerPersonsHandler}>Toggle Persons
                 </button>
                 <h1> Hi, I'm react app </h1>

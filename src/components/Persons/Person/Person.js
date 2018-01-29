@@ -1,10 +1,13 @@
 import React from 'react';
-import './Person.css'
+import styles from './Person.css'
 
 const person = (props) => {
+    const rdn = Math.random();
+    if (rdn < 0.7) {
+        throw new Error('something went wrong');
+    }
     return (
-
-        <div className="Person"
+        <div className={styles.Person}
         >
             <p onClick={props.click}>I'm {props.name}, and I'm {props.age} years old </p>
             <p> {props.children} </p>
