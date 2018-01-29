@@ -81,7 +81,7 @@ class App extends Component {
             style.backgroundColor = 'red';
 
             }
-
+//some comment
         let classes = [];
         if (this.state.persons.length <= 2) {
             classes.push('red');
