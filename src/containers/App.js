@@ -3,6 +3,8 @@ import styles from '../assets/App.css';
 import Person from '../components/Persons/Person/Person';
 import Errorboundary from './ErrorBoundary/ErrorBoundary'
 import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
+
 //''.log => console.log();
 class App extends Component {
     state = {
@@ -45,51 +47,31 @@ class App extends Component {
         this.setState({showPersons: !doesShow});
     }
     deletePersonHandler = (personIndex) => {
-        // const persons = this.state.persons.splice();
         const persons = [...this.state.persons];
         persons.splice(personIndex, 1);
         this.setState({persons: persons})
     }
 
     render() {
-        const style = {
-            //backgroundColor: '#' + (Math.random() * 1000000 ^ 0).toString(),
-            backgroundColor: 'green',
-            font: 'inherit',
-            border: '1px solid black',
-            padding: '8px',
-            color: 'white',
-            cursor: 'pointer'
-        };
-
         let persons = null;
-        let btnClass = '';
+
         if (this.state.showPersons) {
             persons = (
                 persons = <Persons
                     persons={this.state.persons}
                     clicked={this.deletePersonHandler}
-                    changed={this.nameChangedHandler} />;
+                    changed={this.nameChangedHandler}/>
             )
-            //style.backgroundColor = 'red';
-            btnClass = styles.Red;
         }
-//some comment
-        let classes = [];
-        if (this.state.persons.length <= 2) {
-            classes.push(styles);
-        }
-        if (this.state.persons.length <= 1) {
-            classes.push(styles.bold);
-        }
+
+
         return (
             <div className={styles.App}>
-                <button
-                    className={btnClass}
-                    onClick={this.togglerPersonsHandler}>Toggle Persons
-                </button>
-                <h1> Hi, I'm react app </h1>
-                <p className={classes.join(' ')}> This is really working </p>
+                <Cockpit
+                    persons={this.state.persons}
+                    showPersons={this.state.showPersons}
+                    clicked={this.togglerPersonsHandler}
+                />
                 {persons}
             </div>
         );
@@ -97,4 +79,4 @@ class App extends Component {
 }
 
 export default App;
-//return React.createElement('div', {className: "App"}, React.createElement('h1', null, 'Hi, I\'m react app '));
+

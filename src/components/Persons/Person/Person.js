@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Person.css'
 
 const person = (props) => {
-    const rdn = Math.random();
+    /*const rdn = Math.random();
     if (rdn < 0.7) {
         throw new Error('something went wrong');
-    }
+    }*/
     return (
         <div className={styles.Person}
         >
