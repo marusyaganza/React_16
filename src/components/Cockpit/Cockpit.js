@@ -15,7 +15,7 @@ const cockpit = (props) => {
     }
     return (
         <div className={styles.Cockpit}>
-            <h1> Hi, I'm react app </h1>
+            <h1> {props.appTitle} </h1>
             <button
                 className={btnClass}
                 onClick={props.clicked}>Toggle Persons

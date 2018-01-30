@@ -2,18 +2,34 @@ import React, {Component} from 'react';
 import styles from '../assets/App.css';
 import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/Cockpit'
-
+import WithClass from '../hoc/withClass';
 //''.log => console.log();
 class App extends Component {
-    state = {
-        persons: [
-            {id: '1', name: 'Max', age: 28},
-            {id: '2', name: 'Mary', age: 27},
-            {id: '3', name: 'Halk', age: 33}
-        ],
-        otherState: 'some data',
-        showPersons: false
-    };
+    constructor(props) {
+        super(props);
+        console.log('[App.js] inside constructor', props);
+        this.state = {
+            persons: [
+                {id: '1', name: 'Max', age: 28},
+                {id: '2', name: 'Mary', age: 27},
+                {id: '3', name: 'Halk', age: 33}
+            ],
+            otherState: 'some data',
+            showPersons: false
+        };
+    }
+
+    componentWillMount() {
+        console.log('[App.js] inside componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('[App.js] inside componentDidMount');
+    }
+
+    shouldComponentUpdate() {
+        return true;
+    }
 
     switchNamehandler = (newName) => {
         console.log('was clicked');
@@ -64,14 +80,16 @@ class App extends Component {
 
 
         return (
-            <div className={styles.App}>
+            <WithClass classes={styles.App}>
+                <button onClick={() => this.setState({showPersons: true})}>Show persons</button>
                 <Cockpit
+                    appTitle={this.props.title}
                     persons={this.state.persons}
                     showPersons={this.state.showPersons}
                     clicked={this.togglerPersonsHandler}
                 />
                 {persons}
-            </div>
+            </WithClass>
         );
     }
 }
